@@ -42,7 +42,9 @@ const LinksContainer = styled.div`
 
 export const RegistrationForm: React.FC = () => {
   const [serverError, setServerError] = useState<string | undefined>(undefined);
-  const [showOtpForm, setShowOtpForm] = useState<boolean>(false);
+  // const [showOtpForm, setShowOtpForm] = useState<boolean>(false);
+
+  // @ts-ignore
   const [registrationEmail, setRegistrationEmail] = useState<string>('');
   const navigate = useNavigate();
 

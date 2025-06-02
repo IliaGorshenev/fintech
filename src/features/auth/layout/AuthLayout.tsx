@@ -32,29 +32,6 @@ const ContentWrapper = styled.main`
   align-items: center; // Center content like logo and title within the card
 `;
 
-const LogoPlaceholder = styled.div`
-  // Replace this with your actual logo component or <img> tag
-  // The Figma mockups show a "<D>" like logo.
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #007bff; // Example logo color, match your brand
-  margin-bottom: 1.5rem;
-  // If you use an SVG or image:
-  // img {
-  //   height: 50px; // Adjust as needed
-  //   width: auto;
-  // }
-  // For a simple text logo like in Figma:
-  width: 60px;
-  height: 60px;
-  border: 3px solid #007bff; // Example border
-  border-radius: 8px; // Slightly rounded like in some Figma examples
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #e9ecef; // Light background for the logo placeholder
-`;
-
 const PageTitle = styled.h1`
   font-size: 1.8rem;
   color: #333;

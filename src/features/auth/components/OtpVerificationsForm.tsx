@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -39,7 +39,7 @@ interface OtpVerificationFormProps {
 
 export const OtpVerificationForm: React.FC<OtpVerificationFormProps> = ({ email: propEmail, onSuccess }) => {
   const [serverError, setServerError] = useState<string | undefined>(undefined);
-  const navigate = useNavigate();
+  //   const navigate = useNavigate();
   const location = useLocation();
 
   // Get email from URL query params if not passed as prop
