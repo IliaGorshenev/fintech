@@ -1,5 +1,6 @@
 // src/components/layout/AuthLayout.tsx
 
+import { ThemeSwitch } from '@/components/theme-switch';
 import styled from 'styled-components';
 
 // Define a type for the component's props
@@ -43,6 +44,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, title }) => {
   return (
     <LayoutContainer>
       <ContentWrapper>
+        <ThemeSwitch />
         {title && <PageTitle>{title}</PageTitle>}
         {children}
       </ContentWrapper>

@@ -9,12 +9,21 @@ const WelcomeSection = styled.div`
   justify-content: center;
   padding: 2rem;
   text-align: center;
+  background-color: var(--background);
+  color: var(--foreground);
 `;
 
 const Title = styled.h1`
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: #333;
+  color: var(--foreground);
+  font-weight: bold;
+`;
+
+const Description = styled.p`
+  color: var(--foreground);
+  margin-bottom: 1.5rem;
+  max-width: 600px;
 `;
 
 const TelegramButton = styled(Link)`
@@ -28,10 +37,24 @@ const TelegramButton = styled(Link)`
   text-decoration: none;
   font-weight: 500;
   margin-top: 1.5rem;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+
+  /* Dark mode specific styles using CSS variables */
+  .dark & {
+    opacity: 0.9;
+    box-shadow: 0 0 10px rgba(0, 136, 204, 0.3);
+  }
 
   &:hover {
     background-color: #0077b5;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 
   svg {
@@ -53,7 +76,9 @@ export default function IndexPage() {
     <AuthLayout>
       <WelcomeSection>
         <Title>ФинТех - Быстрый и безопасный обмен криптовалют</Title>
-        <p>Обменивайте криптовалюты с низкими комиссиями, безопасными транзакциями и актуальными рыночными курсами.</p>
+        <Description>
+          Обменивайте криптовалюты с низкими комиссиями, безопасными транзакциями и актуальными рыночными курсами.
+        </Description>
 
         <TelegramButton to="/auth">
           <TelegramIcon />

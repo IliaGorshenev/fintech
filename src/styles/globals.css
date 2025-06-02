@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  /* Light theme variables */
+  --background: #ffffff;
+  --foreground: #11181c;
+  --primary: #0072f5;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f3f5;
+  --secondary-foreground: #11181c;
+  --success: #17c964;
+  --success-foreground: #ffffff;
+  --warning: #f5a524;
+  --warning-foreground: #ffffff;
+  --error: #f31260;
+  --error-foreground: #ffffff;
+  --border: #e6e8eb;
+  --input: #e6e8eb;
+}
+
+.dark {
+  /* Dark theme variables */
+  --background: #11181c;
+  --foreground: #ecedee;
+  --primary: #0072f5;
+  --primary-foreground: #ffffff;
+  --secondary: #252b30;
+  --secondary-foreground: #ecedee;
+  --success: #17c964;
+  --success-foreground: #ffffff;
+  --warning: #f5a524;
+  --warning-foreground: #ffffff;
+  --error: #f31260;
+  --error-foreground: #ffffff;
+  --border: #2b3035;
+  --input: #2b3035;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+/* You can add more global styles here */
