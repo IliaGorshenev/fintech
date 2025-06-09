@@ -25,7 +25,7 @@ const ContentWrapper = styled.main`
   height: 852px;
   max-width: 393px; // Max width for the auth form container
   background-color: #ffffff; // White background for the content card
-  padding: 2rem 2.5rem; // Generous padding inside the card
+  padding: 0; // Generous padding inside the card
   border-radius: 8px; // Rounded corners for the card
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); // A subtle shadow
   display: flex;
