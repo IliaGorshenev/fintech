@@ -1,146 +1,131 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useSetAtom } from 'jotai';
 import React, { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 
-import z from 'zod';
 import { Button } from '../../../components/Form/Button';
 import { FormErrorMessage } from '../../../components/Form/ErrorMessage';
 import { InputField } from '../../../components/Form/InputField';
 
+import { Checkbox, CheckboxGroup } from '@/components/Form/Checkbox';
+import { LoadingSmallLogoIcon } from '@/components/icons';
 import { fakeRegisterUser } from '../hooks/useAuth';
-import { RegistrationFormData } from '../types';
-import { registrationSchema } from '../validation/authSchemas';
-// You might have an OTP form as a subsequent step.
-// import { OtpVerificationForm } from './OtpVerificationForm';
 
-const FormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  padding-top: 148px;
-`;
+import { useErrorNotification } from '@/components/hooks/useError';
+import { registrationEmailAtom, registrationUserDataAtom } from '@/store/auth';
+import { initialRegistrationSchema } from '../validation/authSchemas';
+import { Container, FormContainer, LinksContainer, Title } from './styles.module';
 
-const Title = styled.h2`
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #333;
-`;
-
-const LinksContainer = styled.div`
-  margin-top: 1rem;
-  text-align: center;
-  font-size: 0.9rem;
-  a {
-    color: #007bff;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
+// Define a type for the initial registration data
+interface InitialRegistrationData {
+  fullName: string;
+  email: string;
+  acceptTerms: boolean;
+  acceptMarketing: boolean;
+}
 
 export const RegistrationForm: React.FC = () => {
   const [serverError, setServerError] = useState<string | undefined>(undefined);
-  // const [showOtpForm, setShowOtpForm] = useState<boolean>(false);
-
-  // @ts-ignore
-  const [registrationEmail, setRegistrationEmail] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { showError } = useErrorNotification();
+  // Jotai state setters
+  const setRegistrationEmail = useSetAtom(registrationEmailAtom);
+  const setRegistrationUserData = useSetAtom(registrationUserDataAtom);
 
   const {
     register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    reset, // To clear the form after successful submission
-  } = useForm<z.infer<typeof registrationSchema>>({
-    resolver: zodResolver(registrationSchema),
-    // Default values can be set here if needed
+    formState: { errors },
+    watch,
+    setValue,
+    trigger,
+    getValues,
+  } = useForm<InitialRegistrationData>({
+    resolver: zodResolver(initialRegistrationSchema),
     defaultValues: {
       fullName: '',
       email: '',
-      password: '',
-      confirmPassword: '',
-      phoneNumber: '',
+      acceptTerms: false,
+      acceptMarketing: false,
     },
   });
 
-  const onSubmit: SubmitHandler<RegistrationFormData> = async (data) => {
+  console.log('Rendering RegistrationForm');
+
+  const handleInitialStep = async () => {
     setServerError(undefined);
+    setIsLoading(true);
+
     try {
-      const response = await fakeRegisterUser(data);
-      if (response.success) {
-        console.log('Registration successful:', response.message);
-        setRegistrationEmail(data.email); // Store email for OTP step
-        // According to Figma[cite: 1], after initial registration details, an OTP screen appears.
-        // setShowOtpForm(true); // Show OTP form instead of navigating or resetting immediately
-        alert(response.message); // Or navigate to an OTP page
-        reset(); // Clear the form
-        // Potentially navigate to an OTP verification page:
-        // navigate(`/verify-otp?email=${data.email}`);
-        // For now, let's assume OTP is a separate page or we directly go to login.
-        navigate('/auth'); // Redirect to login after successful registration (or to OTP page)
+      const isValid = await trigger(['fullName', 'email', 'acceptTerms', 'acceptMarketing']);
+      console.log('Form is valid:', isValid);
+
+      if (!isValid) {
+        setIsLoading(false);
+        return;
+      }
+
+      const data = getValues();
+      // @ts-ignore
+      const initialResponse = await fakeRegisterUser(data);
+
+      if (initialResponse.success) {
+        // Store data in Jotai atoms
+        setRegistrationEmail(data.email);
+        setRegistrationUserData(data);
+
+        // Navigate to verification page with email as a parameter
+        navigate(`/verify-email?email=${encodeURIComponent(data.email)}`);
       } else {
-        setServerError(response.message);
+        showError(initialResponse.message);
       }
     } catch (error) {
-      setServerError('An unexpected error occurred during registration.');
+      showError('An unexpected error occurred during registration.');
       console.error('Registration error:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // if (showOtpForm) {
-  //   // You would pass the email to the OtpVerificationForm
-  //   // return <OtpVerificationForm email={registrationEmail} onOtpVerified={() => navigate('/auth')} />;
-  //   // For now, this part is commented out as OtpVerificationForm is not fully detailed yet
-  // }
-
-  // The Figma mockups for "Регистрация" [cite: 1] show variations.
-  // Some have Email, Password, Confirm Password.
-  // Some have Name, Email, Password, Confirm Password.
-  // Some are just OTP input screens.
-  // This form implements a more comprehensive set. You can create variations if needed.
-
   return (
-    <FormContainer onSubmit={handleSubmit(onSubmit)} noValidate>
-      <Title>Регистрация</Title> {/* Registration */}
-      {serverError && <FormErrorMessage message={serverError} />}
-      {/* Optional Full Name field based on some Figma screens [cite: 1] */}
-      {/* <InputField
-        label="Полное имя" // Full Name
-        registration={register('fullName')}
-        placeholder="Иван Иванов"
-        error={errors.fullName}
-      /> */}
-      <InputField label="Email" registration={register('email')} type="email" placeholder="user@example.com" error={errors.email} autoCapitalize="none" />
-      <InputField
-        label="Пароль" // Password
-        registration={register('password')}
-        type="password"
-        placeholder="Создайте пароль" // Create a password
-        error={errors.password}
-      />
-      <InputField
-        label="Повторите пароль" // Confirm Password
-        registration={register('confirmPassword')}
-        type="password"
-        placeholder="Повторите пароль" // Confirm password
-        error={errors.confirmPassword}
-      />
-      {/* Optional Phone Number field based on some Figma screens [cite: 1] */}
-      {/* <InputField
-        label="Номер телефона (необязательно)" // Phone Number (optional)
-        registration={register('phoneNumber')}
-        type="tel"
-        placeholder="+7 (999) 000-00-00"
-        error={errors.phoneNumber}
-      /> */}
-      <Button type="submit" isLoading={isSubmitting} disabled={isSubmitting}>
-        Зарегистрироваться {/* Register */}
-      </Button>
-      <LinksContainer>
-        Уже есть аккаунт? <Link to="/auth">Войти</Link> {/* Already have an account? Sign In */}
-      </LinksContainer>
-    </FormContainer>
+    <Container>
+      <LoadingSmallLogoIcon />
+      <Title>Регистрация</Title>
+      <FormContainer>
+        {serverError && <FormErrorMessage message={serverError} />}
+
+        <InputField label="Ваше имя" registration={register('fullName')} placeholder="Введите имя" error={errors.fullName} />
+        <InputField label="Ваш E-mail" registration={register('email')} type="email" placeholder="Введите почту" error={errors.email} autoCapitalize="none" />
+        <CheckboxGroup>
+          <Checkbox
+            id="acceptTerms"
+            label={
+              <>
+                Я ознакомлен с <Link to="/terms">пользовательским соглашением</Link> и <Link to="/privacy">политикой конфиденциальности</Link>
+              </>
+            }
+            checked={watch('acceptTerms')}
+            onChange={(e) => setValue('acceptTerms', e.target.checked)}
+            error={!!errors.acceptTerms}
+            errorMessage={errors.acceptTerms?.message}
+          />
+          <Checkbox
+            id="acceptMarketing"
+            label="Согласен на рассылку рекламных уведомлений"
+            checked={watch('acceptMarketing')}
+            onChange={(e) => setValue('acceptMarketing', e.target.checked)}
+          />
+        </CheckboxGroup>
+
+        <Button type="button" isLoading={isLoading} disabled={isLoading} onClick={handleInitialStep}>
+          Отправить код
+        </Button>
+
+        <LinksContainer>
+          Есть аккаунт? <Link to="/auth">Войти</Link>
+        </LinksContainer>
+      </FormContainer>
+    </Container>
   );
 };

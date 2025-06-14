@@ -1,45 +1,40 @@
 import { useTheme } from '@heroui/use-theme';
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { TelegramProvider } from './features/telegram/TelegramProvider';
 import IndexPage from './pages';
 import AuthPage from './pages/Auth/AuthPage';
 import RecPage from './pages/Auth/RecPage';
 import RegPage from './pages/Auth/RegPage';
 import VerifyOtpPage from './pages/Auth/VerifyPage';
+
+import { ErrorNotifications } from './components/Form/ErrorNotifications';
+import CompleteRegistrationPage from './features/auth/components/CompleteRegistration';
+import OnBoardingPages from './pages/Onboarding/OnBoardingPages';
 import TelegramHome from './pages/TelegramHome';
-import { TelegramProvider } from './features/telegram/TelegramProvider';
 
 function App() {
-  const { theme } = useTheme();
-
-  // Apply theme class to the document element to enable CSS variables
+  const { theme, setTheme } = useTheme();
   useEffect(() => {
-    document.documentElement.className = theme === 'dark' ? 'dark' : 'light';
-  }, [theme]);
-
+    setTheme('light');
+    // setTheme('dark');
+  }, []);
   return (
-    <TelegramProvider>
-      <div className={theme === 'dark' ? 'dark' : 'light'}>
+    <div className={theme === 'dark' ? 'dark' : 'light'}>
+      <TelegramProvider>
+        <ErrorNotifications />
         <Routes>
+          <Route path="/" element={<IndexPage />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/registration" element={<RegPage />} />
-          <Route path="/verify-otp" element={<VerifyOtpPage />} />
+          <Route path="/verify-email" element={<VerifyOtpPage />} />
+          <Route path="/complete-registration" element={<CompleteRegistrationPage />} />
           <Route path="/recovery" element={<RecPage />} />
           <Route path="/telegram" element={<TelegramHome />} />
-
-          {/* Protected routes */}
-          <Route
-            path="/"
-            element={
-              // <ProtectedRoute>
-              <IndexPage />
-              // </ProtectedRoute>
-            }
-          />
-          {/* Add other protected routes here */}
+          <Route path="/onboarding" element={<OnBoardingPages />} />
         </Routes>
-      </div>
-    </TelegramProvider>
+      </TelegramProvider>
+    </div>
   );
 }
 

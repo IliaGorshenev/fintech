@@ -2,7 +2,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 
 import z from 'zod';
 import { Button } from '../../../components/Form/Button';
@@ -11,44 +10,7 @@ import { InputField } from '../../../components/Form/InputField';
 import { fakeRequestPasswordRecovery, fakeResetPasswordWithCode } from '../hooks/useAuth';
 import { PasswordRecoveryFormData } from '../types';
 import { requestPasswordRecoverySchema, resetPasswordSchema } from '../validation/authSchemas';
-
-const FormContainer = styled.form`
-  display: flex;
-  flex-direction: column; 
-  padding-top: 148px;
-`;
-
-const Title = styled.h2`
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #333;
-`;
-
-const SuccessMessage = styled.p`
-  color: green;
-  text-align: center;
-  margin-bottom: 1rem;
-`;
-
-const InfoText = styled.p`
-  font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 1rem;
-  text-align: center;
-`;
-
-const LinksContainer = styled.div`
-  margin-top: 1rem;
-  text-align: center;
-  font-size: 0.9rem;
-  a {
-    color: #007bff;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
+import { FormContainer, Title, InfoText, SuccessMessage, LinksContainer } from './styles.module';
 
 type PasswordRecoveryStep = 'requestEmail' | 'enterCodeAndNewPassword' | 'success';
 

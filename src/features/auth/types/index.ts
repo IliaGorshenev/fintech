@@ -3,14 +3,15 @@ export interface LoginFormData {
     password?: string; // Password might be optional if using social login or passwordless
   }
   
+
   export interface RegistrationFormData {
-    // Based on Figma[cite: 1], typical fields are:
-    fullName?: string; // Or separate First Name, Last Name
+    fullName: string;
     email: string;
-    password?: string;
-    confirmPassword?: string;
-    phoneNumber?: string; // Some mockups show phone
-    // Add other fields as seen in the most complete registration form in Figma [cite: 1]
+    password: string;
+    confirmPassword: string;
+    phoneNumber?: string;
+    acceptTerms: boolean;
+    acceptMarketing: boolean;
   }
   
   export interface PasswordRecoveryFormData {

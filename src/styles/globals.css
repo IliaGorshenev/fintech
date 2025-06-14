@@ -4,10 +4,10 @@
 
 :root {
   /* Light theme variables */
-  --background: #ffffff;
-  --foreground: #11181c;
-  --primary: #0072f5;
-  --primary-foreground: #ffffff;
+  --background: var(--grey-100);
+  --foreground: var(--black-500);
+  --primary: var(--blue-700);
+  --primary-foreground: var(--grey-100);
   --secondary: #f1f3f5;
   --secondary-foreground: #11181c;
   --success: #17c964;
@@ -18,14 +18,39 @@
   --error-foreground: #ffffff;
   --border: #e6e8eb;
   --input: #e6e8eb;
+
+  /* Blue palette */
+  --blue-900: #2234b9;
+  --blue-700: #344cff;
+  --blue-500: #8e9cff;
+  --blue-300: #d2d7ff;
+
+  /* Black palette */
+  --black-900: #1f1f22;
+  --black-700: #2d2d36;
+  --black-500: #3f3d51;
+  --black-300: #605e94;
+  --black-100: #e3e3f3;
+
+  /* Grey palette */
+  --grey-900: #71717a;
+  --grey-700: #a1a1aa;
+  --grey-300: #ecedee;
+  --grey-100: #f8f8f8;
+
+  /* Green palette */
+  --green-900: #79b91a;
+  --green-700: #92de20;
+  --green-500: #c8ef8e;
+  --green-300: #e0f6c0;
 }
 
 .dark {
   /* Dark theme variables */
-  --background: #11181c;
-  --foreground: #ecedee;
-  --primary: #0072f5;
-  --primary-foreground: #ffffff;
+  --background: var(--black-900);
+  --foreground: var(--grey-100);
+  --primary: var(--green-500);
+  --primary-foreground: var(--black-900);
   --secondary: #252b30;
   --secondary-foreground: #ecedee;
   --success: #17c964;
@@ -36,6 +61,32 @@
   --error-foreground: #ffffff;
   --border: #2b3035;
   --input: #2b3035;
+
+  /* Green palette (replacing blue in dark mode) */
+  --blue-900: #79b91a; /* Using green-900 instead of blue-900 */
+  /* --blue-700: #92de20;   */
+  --blue-700: #c8ef8e;
+  --blue-500: #c8ef8e; /* Using green-500 instead of blue-500 */
+  --blue-300: #e0f6c0; /* Using green-300 instead of blue-300 */
+
+  /* Black palette (kept the same) */
+  --black-900: #1f1f22;
+  --black-700: #2d2d36;
+  --black-500: #3f3d51;
+  --black-300: #605e94;
+  --black-100: #e3e3f3;
+
+  /* Grey palette (kept the same) */
+  --grey-900: #71717a;
+  --grey-700: #a1a1aa;
+  --grey-300: #ecedee;
+  --grey-100: #f8f8f8;
+
+  /* Green palette (kept for reference) */
+  --green-900: #79b91a;
+  --green-700: #92de20;
+  --green-500: #c8ef8e;
+  --green-300: #e0f6c0;
 }
 
 body {
