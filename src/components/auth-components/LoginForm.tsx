@@ -2,16 +2,16 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom'; // Assuming you use React Router
 
-import { useErrorNotification } from '@/components/hooks/useError';
-import { LoadingSmallLogoIcon, TelegramIcon } from '@/components/icons';
+import { fakeLoginUser } from '@/hooks/useAuth';
+import { useErrorNotification } from '@/hooks/useError';
+import { LoadingSmallLogoIcon, TelegramIcon } from '@/icons/icons';
 import { TelegramButton } from '@/pages/styles.module';
+import { LoginFormData } from '@/types';
+import { loginSchema } from '@/validation/authSchemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import z from 'zod';
-import { Button } from '../../../components/Form/Button';
-import { InputField } from '../../../components/Form/InputField';
-import { fakeLoginUser } from '../hooks/useAuth';
-import { LoginFormData } from '../types';
-import { loginSchema } from '../validation/authSchemas';
+import { Button } from '../Form/Button';
+import { InputField } from '../Form/InputField';
 import { Container, FormContainer, LinksContainer, Title } from './styles.module';
 
 export const LoginForm: React.FC = () => {
@@ -34,7 +34,6 @@ export const LoginForm: React.FC = () => {
         navigate('/onboarding');
         // TODO: Handle successful login (e.g., save token, redirect)
         // For now, redirect to home page as an example
-        
       } else {
         showError(response.message);
       }

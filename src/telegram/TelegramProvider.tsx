@@ -1,6 +1,4 @@
-import { Promo } from '@/components/Promo/Promo';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { AuthLayout } from '../auth/layout/AuthLayout';
 
 // Define the WebApp type based on Telegram's API
 interface TelegramWebApp {
@@ -142,14 +140,12 @@ export const TelegramProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   return (
     <TelegramContext.Provider value={value}>
-      {isLoading ? (
-        // <AuthLayout>
-        //   <Promo></Promo>
-        // </AuthLayout>
-        children
-      ) : (
-        children
-      )}
+      {isLoading
+        ? // <AuthLayout>
+          //   <Promo></Promo>
+          // </AuthLayout>
+          children
+        : children}
     </TelegramContext.Provider>
   );
 };

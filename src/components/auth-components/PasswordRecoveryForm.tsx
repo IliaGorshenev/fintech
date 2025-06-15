@@ -3,14 +3,15 @@ import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { fakeRequestPasswordRecovery, fakeResetPasswordWithCode } from '@/hooks/useAuth';
+import { PasswordRecoveryFormData } from '@/types';
+import { requestPasswordRecoverySchema, resetPasswordSchema } from '@/validation/authSchemas';
 import z from 'zod';
-import { Button } from '../../../components/Form/Button';
-import { FormErrorMessage } from '../../../components/Form/ErrorMessage';
-import { InputField } from '../../../components/Form/InputField';
-import { fakeRequestPasswordRecovery, fakeResetPasswordWithCode } from '../hooks/useAuth';
-import { PasswordRecoveryFormData } from '../types';
-import { requestPasswordRecoverySchema, resetPasswordSchema } from '../validation/authSchemas';
-import { FormContainer, Title, InfoText, SuccessMessage, LinksContainer } from './styles.module';
+import { FormContainer, InfoText, LinksContainer, SuccessMessage, Title } from './styles.module';
+
+import { Button } from '../Form/Button';
+import { FormErrorMessage } from '../Form/ErrorMessage';
+import { InputField } from '../Form/InputField';
 
 type PasswordRecoveryStep = 'requestEmail' | 'enterCodeAndNewPassword' | 'success';
 

@@ -4,17 +4,16 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Button } from '../../../components/Form/Button';
-import { FormErrorMessage } from '../../../components/Form/ErrorMessage';
-import { InputField } from '../../../components/Form/InputField';
-
 import { Checkbox, CheckboxGroup } from '@/components/Form/Checkbox';
-import { LoadingSmallLogoIcon } from '@/components/icons';
-import { fakeRegisterUser } from '../hooks/useAuth';
+import { LoadingSmallLogoIcon } from '@/icons/icons';
 
-import { useErrorNotification } from '@/components/hooks/useError';
+import { useErrorNotification } from '@/hooks/useError';
 import { registrationEmailAtom, registrationUserDataAtom } from '@/store/auth';
-import { initialRegistrationSchema } from '../validation/authSchemas';
+
+import { initialRegistrationSchema } from '@/validation/authSchemas';
+import { Button } from '@heroui/button';
+import { FormErrorMessage } from '../Form/ErrorMessage';
+import { InputField } from '../Form/InputField';
 import { Container, FormContainer, LinksContainer, Title } from './styles.module';
 
 // Define a type for the initial registration data

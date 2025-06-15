@@ -50,6 +50,8 @@ const StyledButton = styled.button<{ $fullWidth?: boolean; $variant?: string }>`
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
+    background-color: var(--disabled-background);
+    color: var(--disabled-foreground)
   }
 
   svg {

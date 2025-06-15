@@ -10,15 +10,26 @@
   --primary-foreground: var(--grey-100);
   --secondary: #f1f3f5;
   --secondary-foreground: #11181c;
-  --success: #17c964;
+  --third-foregorund: var(--grey-900);
+  --success: #79b91a;
   --success-foreground: #ffffff;
   --warning: #f5a524;
   --warning-foreground: #ffffff;
-  --error: #f31260;
+  --error: #e51978;
   --error-foreground: #ffffff;
   --border: #e6e8eb;
   --input: #e6e8eb;
+  --input-borders: var(--grey-500);
+  --disabled-background: var(--grey-400);
+  --disabled-foreground: var(--grey-800);
+  --bg-onboarding: linear-gradient(180deg, #fff 0%, #e3e3f3 100%);
+  --bg-avatar: #d9d9d9;
 
+  --fg-avatar: var(--grey-900);
+  --bg-icons: rgba(52, 76, 255, 0.2);
+  --fg-icons: var(--purple-700);
+
+  --purple-700: #605e94;
   /* Blue palette */
   --blue-900: #2234b9;
   --blue-700: #344cff;
@@ -35,6 +46,8 @@
   /* Grey palette */
   --grey-900: #71717a;
   --grey-700: #a1a1aa;
+  --grey-600: #48484e;
+  --grey-400: #d9d9d9;
   --grey-300: #ecedee;
   --grey-100: #f8f8f8;
 
@@ -43,6 +56,46 @@
   --green-700: #92de20;
   --green-500: #c8ef8e;
   --green-300: #e0f6c0;
+
+  --usdw-icon-color: #1f1f22;
+
+  --bcn-color: #ff9416;
+  --eth-color: #344cff;
+  --erc20-color: #6ca614;
+  --trc20-color: #3f3d51;
+  --usdw-color: #f8f8f8;
+  --usdb-color: #344cff;
+  --eur-color: #ff9416;
+  --gbp-color: #6ca614;
+  --chf-color: #605e94;
+  --cny-color: #df195e;
+  --default-color: #605e94;
+
+  /* Ticker Colors - Light Theme (same as icon background) */
+  --bcn-ticker-color: rgba(255, 148, 22, 0.2); /* 20% of #ff9416 */
+  --eth-ticker-color: rgba(52, 76, 255, 0.2); /* 20% of #344cff */
+  --erc20-ticker-color: rgba(108, 166, 20, 0.2); /* 20% of #6ca614 */
+  --trc20-ticker-color: rgba(63, 61, 81, 0.2); /* 20% of #3f3d51 */
+  --usdw-ticker-color: rgba(236, 237, 238, 1); /* 20% of #f8f8f8 */
+  --usdb-ticker-color: rgba(52, 76, 255, 0.2); /* 20% of #344cff */
+  --eur-ticker-color: rgba(255, 148, 22, 0.2); /* 20% of #ff9416 */
+  --gbp-ticker-color: rgba(108, 166, 20, 0.2); /* 20% of #6ca614 */
+  --chf-ticker-color: rgba(96, 94, 148, 0.2); /* 20% of #605e94 */
+  --cny-ticker-color: rgba(223, 25, 94, 0.2); /* 20% of #df195e */
+  --default-ticker-color: rgba(96, 94, 148, 0.2);
+
+  /* Foreground Colors - Light Theme */
+  --bcn-fg-color: var(--bcn-color);
+  --eth-fg-color: var(--eth-color);
+  --erc20-fg-color: var(--erc20-color);
+  --trc20-fg-color: var(--trc20-color);
+  --usdw-fg-color: #3f3d51;
+  --usdb-fg-color: var(--usdb-color);
+  --eur-fg-color: var(--eur-color);
+  --gbp-fg-color: var(--gbp-color);
+  --chf-fg-color: var(--chf-color);
+  --cny-fg-color: var(--cny-color);
+  --default-fg-color: var(--default-color);
 }
 
 .dark {
@@ -51,18 +104,27 @@
   --foreground: var(--grey-100);
   --primary: var(--green-500);
   --primary-foreground: var(--black-900);
+  --third-foregorund: var(--grey-300);
   --secondary: #252b30;
   --secondary-foreground: #ecedee;
-  --success: #17c964;
+  --success: #79b91a;
   --success-foreground: #ffffff;
   --warning: #f5a524;
   --warning-foreground: #ffffff;
-  --error: #f31260;
+  --error: #e51978;
   --error-foreground: #ffffff;
   --border: #2b3035;
   --input: #2b3035;
+  --input-borders: var(--grey-700);
+  --disabled-background: var(--grey-600);
+  --disabled-foreground: var(--grey-400);
+  --bg-onboarding: linear-gradient(180deg, var(--black-900) 70%, var(--green-500) 100%);
+  --bg-avatar: #2d2d36;
+  --fg-avatar: #a1a1aa;
+  --fg-icons: var(--purple-700);
+  --bg-icons: rgba(146, 222, 32, 0.2);
+  --purple-700: #c8ef8e;
 
-  /* Green palette (replacing blue in dark mode) */
   --blue-900: #79b91a; /* Using green-900 instead of blue-900 */
   /* --blue-700: #92de20;   */
   --blue-700: #c8ef8e;
@@ -79,6 +141,9 @@
   /* Grey palette (kept the same) */
   --grey-900: #71717a;
   --grey-700: #a1a1aa;
+  --grey-600: #48484e;
+  --grey-400: #d9d9d9;
+
   --grey-300: #ecedee;
   --grey-100: #f8f8f8;
 
@@ -87,6 +152,47 @@
   --green-700: #92de20;
   --green-500: #c8ef8e;
   --green-300: #e0f6c0;
+
+  --usdw-icon-color: #f8f8f8;
+
+  --bcn-color: #ff9416;
+  --eth-color: #605e94;
+  --erc20-color: #6ca614;
+  --trc20-color: #3f3d51;
+  --usdw-color: #1f1f22;
+  --usdb-color: #3f3d51;
+  --eur-color: #ff9416;
+  --gbp-color: #6ca614;
+  --chf-color: #605e94;
+  --cny-color: #df195e;
+  --default-color: #605e94;
+
+  /* Ticker Colors - Dark Theme */
+  /* Ticker Colors - Dark Theme (20% opacity of icon background) */
+  --bcn-ticker-color: rgba(255, 148, 22, 0.2); /* 20% of #ff9416 */
+  --eth-ticker-color: rgba(96, 94, 148, 0.2); /* 20% of #605e94 */
+  --erc20-ticker-color: rgba(108, 166, 20, 0.2); /* 20% of #6ca614 */
+  --trc20-ticker-color: #48484e; /* 20% of #3f3d51 */
+  --usdw-ticker-color: #48484e; /* 20% of #48484e (Special case for USDW) */
+  --usdb-ticker-color: #3f3d51; /* 20% of #3f3d51 */
+  --eur-ticker-color: rgba(255, 148, 22, 0.2); /* 20% of #ff9416 */
+  --gbp-ticker-color: rgba(108, 166, 20, 0.2);
+  --chf-ticker-color: rgba(63, 61, 81, 0.2);
+  --cny-ticker-color: rgba(223, 25, 94, 0.2);
+  --default-ticker-color: rgba(96, 94, 148, 0.2);
+
+  /* Foreground Colors - Light Theme */
+  --bcn-fg-color: var(--bcn-color);
+  --eth-fg-color: #e3e3f3;
+  --erc20-fg-color: var(--erc20-color);
+  --trc20-fg-color: #e3e3f3;
+  --usdw-fg-color: #e3e3f3;
+  --usdb-fg-color: #e3e3f3;
+  --eur-fg-color: var(--eur-color);
+  --gbp-fg-color: var(--gbp-color);
+  --chf-fg-color: #e3e3f3;
+  --cny-fg-color: var(--cny-color);
+  --default-fg-color: var(--default-color);
 }
 
 body {

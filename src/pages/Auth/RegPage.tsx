@@ -1,5 +1,5 @@
-import { RegistrationForm } from '@/features/auth/components/RegistrationForm';
-import { AuthLayout } from '@/features/auth/layout/AuthLayout';
+import { RegistrationForm } from '@/components/auth-components/RegistrationForm';
+import { AuthLayout } from '@/components/layout/AuthLayout';
 import React from 'react';
 // import { AuthLayout } from '../components/layout/AuthLayout'; // Optional
 

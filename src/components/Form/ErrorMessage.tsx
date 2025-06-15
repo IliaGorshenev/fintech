@@ -1,4 +1,4 @@
-import { ErrorIcon } from '@/components/icons';
+import { ErrorIcon } from '@/icons/icons';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 interface ErrorMessageProps {

@@ -1,7 +1,7 @@
+import { title } from '@/components/primitives';
+import { useTelegram } from '@/telegram/TelegramProvider';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useTelegram } from '@/features/telegram/TelegramProvider';
-import { title } from '@/components/primitives';
 
 const Container = styled.div`
   display: flex;
@@ -51,13 +51,13 @@ const TelegramHome: React.FC = () => {
       // Configure the main button
       webApp.MainButton.setText('CONTINUE');
       webApp.MainButton.show();
-      
+
       const handleMainButtonClick = () => {
         webApp.showAlert('You clicked the main button!');
       };
-      
+
       webApp.MainButton.onClick(handleMainButtonClick);
-      
+
       return () => {
         webApp.MainButton.offClick(handleMainButtonClick);
       };
@@ -66,16 +66,19 @@ const TelegramHome: React.FC = () => {
 
   const handleShowPopup = () => {
     if (webApp) {
-      webApp.showPopup({
-        title: 'Sample Popup',
-        message: 'This is a sample popup in Telegram Web App',
-        buttons: [
-          { id: 'ok', text: 'OK' },
-          { id: 'cancel', text: 'Cancel' }
-        ]
-      }, (buttonId) => {
-        webApp.showAlert(`You clicked: ${buttonId}`);
-      });
+      webApp.showPopup(
+        {
+          title: 'Sample Popup',
+          message: 'This is a sample popup in Telegram Web App',
+          buttons: [
+            { id: 'ok', text: 'OK' },
+            { id: 'cancel', text: 'Cancel' },
+          ],
+        },
+        (buttonId) => {
+          webApp.showAlert(`You clicked: ${buttonId}`);
+        },
+      );
     }
   };
 
@@ -84,7 +87,7 @@ const TelegramHome: React.FC = () => {
       // Send data back to the bot
       const data = JSON.stringify({
         action: 'user_interaction',
-        timestamp: Date.now()
+        timestamp: Date.now(),
       });
       webApp.sendData(data);
     }
@@ -92,26 +95,22 @@ const TelegramHome: React.FC = () => {
 
   return (
     <Container>
-      <h1 className={title({ color: "blue", size: "lg" })}>
-        Telegram Web App
-      </h1>
-      
+      <h1 className={title({ color: 'blue', size: 'lg' })}>Telegram Web App</h1>
+
       {user && (
         <UserInfo>
           <h3>User Information</h3>
           <p>ID: {user.id}</p>
-          <p>Name: {user.first_name} {user.last_name || ''}</p>
+          <p>
+            Name: {user.first_name} {user.last_name || ''}
+          </p>
           {user.username && <p>Username: @{user.username}</p>}
         </UserInfo>
       )}
-      
-      <Button onClick={handleShowPopup}>
-        Show Popup
-      </Button>
-      
-      <Button onClick={handleSendData}>
-        Send Data to Bot
-      </Button>
+
+      <Button onClick={handleShowPopup}>Show Popup</Button>
+
+      <Button onClick={handleSendData}>Send Data to Bot</Button>
     </Container>
   );
 };

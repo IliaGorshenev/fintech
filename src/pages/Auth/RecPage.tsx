@@ -1,5 +1,5 @@
-import { PasswordRecoveryForm } from '@/features/auth/components/PasswordRecoveryForm';
-import { AuthLayout } from '@/features/auth/layout/AuthLayout';
+import { PasswordRecoveryForm } from '@/components/auth-components/PasswordRecoveryForm';
+import { AuthLayout } from '@/components/layout/AuthLayout';
 import React from 'react';
 // import { AuthLayout } from '../components/layout/AuthLayout'; // Optional
 

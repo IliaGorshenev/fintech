@@ -1,5 +1,5 @@
-import { LoadingSmallLogoIcon, TelegramIcon } from '@/components/icons';
-import { AuthLayout } from '@/features/auth/layout/AuthLayout';
+import { AuthLayout } from '@/components/layout/AuthLayout';
+import { LoadingSmallLogoIcon, TelegramIcon } from '@/icons/icons';
 import { TelegramButton, Title, WelcomeSection } from './styles.module';
 
 export default function IndexPage() {

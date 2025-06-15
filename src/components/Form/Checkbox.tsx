@@ -1,4 +1,4 @@
-import { keyframes, styled } from "styled-components";
+import { keyframes, styled } from 'styled-components';
 
 export const shake = keyframes`
   0% { transform: translateX(0); }
@@ -51,7 +51,7 @@ export const CheckboxCustom = styled.span<{ $checked: boolean; $error?: boolean 
   height: 20px;
   flex-shrink: 0;
   border-radius: 6px;
-  border: 2px solid ${(props) => (props.$error ? 'var(--error, #E51978)' : props.$checked ? 'var(--primary)' : 'var(--grayscale_300, #D9D9D9)')};
+  border: 2px solid ${(props) => (props.$error ? 'var(--error)' : props.$checked ? 'var(--primary)' : 'var(--grey-700)')};
   background-color: ${(props) => (props.$checked ? 'var(--primary)' : 'transparent')};
   display: inline-flex;
   justify-content: center;
@@ -65,7 +65,7 @@ export const CheckboxCustom = styled.span<{ $checked: boolean; $error?: boolean 
     display: ${(props) => (props.$checked ? 'block' : 'none')};
     width: 6px;
     height: 10px;
-    border: solid white;
+    border: solid #ffffff;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
     margin-bottom: 2px;
@@ -74,8 +74,8 @@ export const CheckboxCustom = styled.span<{ $checked: boolean; $error?: boolean 
 
 export const CheckboxText = styled.span`
   padding-top: 2px;
+  color: var(--foreground);
 `;
-
 
 interface CheckboxProps {
   id: string;
@@ -89,13 +89,7 @@ interface CheckboxProps {
 export const Checkbox: React.FC<CheckboxProps> = ({ id, label, checked, onChange, error, errorMessage }) => {
   return (
     <CheckboxContainer>
-      <CheckboxInput
-        type="checkbox"
-        id={id}
-        checked={checked}
-        onChange={onChange}
-        $error={error}
-      />
+      <CheckboxInput type="checkbox" id={id} checked={checked} onChange={onChange} $error={error} />
       <CheckboxLabel htmlFor={id} $error={error}>
         <CheckboxCustom $checked={checked} $error={error} />
         <CheckboxText>{label}</CheckboxText>
@@ -107,7 +101,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({ id, label, checked, onChange
 
 // Add this new styled component for error messages
 const ErrorText = styled.p`
-  color: var(--error, #E51978);
+  color: var(--error);
   font-family: Inter;
   font-size: 12px;
   font-style: normal;

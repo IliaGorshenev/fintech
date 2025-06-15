@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 
 import { useTheme } from '@heroui/use-theme';
-import { LoadingSmallLogoIcon } from '../icons';
+import { LoadingSmallLogoIcon } from '../../icons/icons';
 import { AnimatedSpan, LoadingLogoWrapper, LoadingSpinner, LoadingText, PromoFirstLine, PromoText } from './Styles.module';
 
 const LoadingComponent: React.FC<{ message?: string }> = ({ message = 'Загрузка' }) => {

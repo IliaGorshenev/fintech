@@ -37,7 +37,7 @@ export const Title = styled.h2`
   text-align: center;
   margin-top: 24px;
   margin-bottom: 48px;
-  color: var(--secondary_300, #3f3d51);
+  color: var(--foreground);
   font-family: Inter;
   font-size: 32px;
   font-style: normal;
@@ -48,9 +48,9 @@ export const LinksContainer = styled.div`
   margin-top: 1rem;
   text-align: center;
   font-size: 0.9rem;
-
+  color: var(--foreground);
   a {
-    color: #007bff;
+    color: var(--primary);
     text-decoration: none;
     margin: 0 0.5rem;
 

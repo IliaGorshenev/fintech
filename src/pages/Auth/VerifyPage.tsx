@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/Form/Button';
-import { LoadingSmallLogoIcon } from '@/components/icons';
-import { Container } from '@/features/auth/components/styles.module';
-import { fakeVerifyOtp } from '@/features/auth/hooks/useAuth';
-import { AuthLayout } from '@/features/auth/layout/AuthLayout';
+import { LoadingSmallLogoIcon } from '@/icons/icons';
+
+import { Container } from '@/components/auth-components/styles.module';
+import { AuthLayout } from '@/components/layout/AuthLayout';
+import { fakeVerifyOtp } from '@/hooks/useAuth';
 import { registrationEmailAtom } from '@/store/auth';
 import { BackLink, CodeInput, CodeInputContainer, ErrorText, InfoText, SuccessText, TimerText, Title } from '../styles.module';
 

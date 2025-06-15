@@ -9,10 +9,11 @@ import { Button } from '@/components/Form/Button';
 
 import { FormErrorMessage } from '@/components/Form/ErrorMessage';
 import { InputField } from '@/components/Form/InputField';
-import { EyeClosedIcon, EyeIcon, LoadingSmallLogoIcon } from '@/components/icons';
-import { fakeCompleteRegistration } from '@/features/auth/hooks/useAuth';
+import { fakeCompleteRegistration } from '@/hooks/useAuth';
+import { EyeClosedIcon, EyeIcon, LoadingSmallLogoIcon } from '@/icons/icons';
 import { registrationEmailAtom, registrationUserDataAtom } from '@/store/auth';
-import { AuthLayout } from '../layout/AuthLayout';
+
+import { AuthLayout } from '@/components/layout/AuthLayout';
 import { Container, FormContainer, SuccessMessage, Title } from './styles.module';
 
 // Success icon component for the email field
