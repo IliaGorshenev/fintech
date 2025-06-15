@@ -10,6 +10,7 @@ import { LoadingSmallLogoIcon } from '@/icons/icons';
 import { useErrorNotification } from '@/hooks/useError';
 import { registrationEmailAtom, registrationUserDataAtom } from '@/store/auth';
 
+import { fakeRegisterUser } from '@/hooks/useAuth';
 import { initialRegistrationSchema } from '@/validation/authSchemas';
 import { Button } from '@heroui/button';
 import { FormErrorMessage } from '../Form/ErrorMessage';
@@ -66,8 +67,13 @@ export const RegistrationForm: React.FC = () => {
       }
 
       const data = getValues();
-      // @ts-ignore
-      const initialResponse = await fakeRegisterUser(data);
+      const registrationData = {
+        ...data,
+        password: '', // These will be set in a later step
+        confirmPassword: '',
+      };
+
+      const initialResponse = await fakeRegisterUser(registrationData);
 
       if (initialResponse.success) {
         // Store data in Jotai atoms

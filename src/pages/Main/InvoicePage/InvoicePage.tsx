@@ -24,7 +24,7 @@ const InvoicePage: React.FC = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<InvoiceFormData>({
     defaultValues: {
       country: '',
