@@ -24,11 +24,29 @@
   --disabled-foreground: var(--grey-800);
   --bg-onboarding: linear-gradient(180deg, #fff 0%, #e3e3f3 100%);
   --bg-avatar: #d9d9d9;
+  --bg-menu-item: #e3e3f3;
+  --bg-faq-item: #ecedee;
 
   --fg-avatar: var(--grey-900);
   --bg-icons: rgba(52, 76, 255, 0.2);
   --fg-icons: var(--purple-700);
 
+
+  --calendar-bg: #ffffff;
+  --calendar-border: var(--grey-300);
+  --calendar-text: var(--foreground);
+  --calendar-selected-bg: var(--primary);
+  --calendar-selected-text: white;
+  --calendar-today-bg: var(--blue-300);
+  --calendar-today-text: var(--blue-900);
+  --calendar-range-bg: var(--blue-300);
+  --calendar-hover-bg: var(--grey-300);
+  --calendar-disabled-text: var(--grey-700);
+  --calendar-weekend-text: var(--error);
+  --calendar-header-text: var(--black-500);
+  --calendar-day-names: var(--grey-900);
+
+  
   --purple-700: #605e94;
   /* Blue palette */
   --blue-900: #2234b9;
@@ -123,6 +141,9 @@
   --fg-avatar: #a1a1aa;
   --fg-icons: var(--purple-700);
   --bg-icons: rgba(146, 222, 32, 0.2);
+  --bg-faq-item: #2d2d36;
+  --bg-menu-item: #2d2d36;
+
   --purple-700: #c8ef8e;
 
   --blue-900: #79b91a; /* Using green-900 instead of blue-900 */

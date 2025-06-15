@@ -12,14 +12,18 @@ import { ErrorNotifications } from './components/Form/ErrorNotifications';
 
 import CompleteRegistrationPage from './components/auth-components/CompleteRegistration';
 import Dashboard from './pages/Main/Dashboard';
+import ExchangePage from './pages/Main/ExachangePage';
+import InvoicePage from './pages/Main/InvoicePage/InvoicePage';
 import OnBoardingPages from './pages/Onboarding/OnBoardingPages';
 import TelegramHome from './pages/TelegramHome';
 import { ThemePreview } from './telegram/ThemePreview';
-import ExchangePage from './pages/Main/ExachangePage';
-import InvoicePage from './pages/Main/InvoicePage';
 
-import SettingsPage from './pages/Main/SettingsPage';
+import FAQ from './pages/Main/FAQ';
+import ProfilePage from './pages/Main/Profile/Profile';
+
+import { RequestsPage } from './pages/Main/Requests';
 import { ReshufflePage } from './pages/Main/ReshufflePage';
+import SettingsPage from './pages/Main/SettingsPage';
 
 // Flag to enable theme preview mode (you can toggle this during development)
 const THEME_PREVIEW_MODE = import.meta.env.DEV && true; // Set to true when you want to preview both themes
@@ -48,6 +52,9 @@ function App() {
         <Route path="/exchange" element={<ExchangePage />} />
         <Route path="/invoice" element={<InvoicePage />} />
         <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/requests" element={<RequestsPage />} />
       </Routes>
     </TelegramProvider>
   );

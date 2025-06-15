@@ -1,19 +1,12 @@
 import { Button } from '@/components/Form/Button';
+import { Checkbox, CheckboxContainer } from '@/components/Form/Checkbox';
 import { InputField } from '@/components/Form/InputField';
 import { SelectField } from '@/components/select/SelectField';
-import { ChangeArrowsIcon, InfoIcon } from '@/icons/icons';
+import { ChangeArrowsIcon, InfoIcon, QuestionIcon } from '@/icons/icons';
 import MainLayout from '@/layouts/MainLayout';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FormGroup, InfoBox, InfoText, InputWithSymbol, PageContainer, Title } from './styles.module';
-
-// New styled components specific to ExchangePage
-const ContentCard = styled.div`
-  background: var(--background);
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-`;
 
 const ExchangeRateBox = styled.div`
   background: var(--primary-light);
@@ -31,21 +24,8 @@ const ArrowButton = styled.button`
   display: flex;
   justify-content: center;
   margin: 10px 0;
-`;
-
-const CheckboxContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-`;
-
-const Checkbox = styled.input`
-  margin-right: 10px;
-`;
-
-const CheckboxLabel = styled.label`
-  display: flex;
-  align-items: center;
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+  pointer-events: ${(props) => (props.disabled ? 'none' : 'auto')};
 `;
 
 const QuestionMark = styled.span`
@@ -62,6 +42,7 @@ const DisabledText = styled.p`
 
 const ButtonGroup = styled.div`
   display: flex;
+  flex-direction: column;
   gap: 10px;
   margin-top: 20px;
 `;
@@ -76,6 +57,12 @@ const SecondaryButton = styled(Button)`
   }
 `;
 
+const ErrorText = styled.p`
+  color: var(--error);
+  font-size: 12px;
+  margin-top: 4px;
+`;
+
 const ExchangePage: React.FC = () => {
   const [givingAmount, setGivingAmount] = useState('');
   const [receivingAmount, setReceivingAmount] = useState('');
@@ -83,19 +70,70 @@ const ExchangePage: React.FC = () => {
   const [isCourierDelivery, setIsCourierDelivery] = useState(false);
   const [selectedOffice, setSelectedOffice] = useState('');
 
+  // Validation states
+  const [errors, setErrors] = useState({
+    selectedOffice: '',
+    givingAmount: '',
+  });
+  const [touched, setTouched] = useState({
+    selectedOffice: false,
+    givingAmount: false,
+  });
+
+  const validate = () => {
+    const newErrors = {
+      selectedOffice: !selectedOffice ? 'Выберите адрес офиса' : '',
+      givingAmount: !givingAmount ? 'Введите сумму' : '',
+    };
+
+    setErrors(newErrors);
+    return !Object.values(newErrors).some((error) => error);
+  };
+
   const handleSwap = () => {
-    const temp = givingAmount;
-    setGivingAmount(receivingAmount);
-    setReceivingAmount(temp);
+    if (validate()) {
+      const temp = givingAmount;
+      setGivingAmount(receivingAmount);
+      setReceivingAmount(temp);
+    } else {
+      // Mark fields as touched to show errors
+      setTouched({
+        selectedOffice: true,
+        givingAmount: true,
+      });
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ givingAmount, receivingAmount, promoCode, isCourierDelivery, selectedOffice });
+
+    if (validate()) {
+      console.log({ givingAmount, receivingAmount, promoCode, isCourierDelivery, selectedOffice });
+      // Submit form logic here
+    } else {
+      // Mark fields as touched to show errors
+      setTouched({
+        selectedOffice: true,
+        givingAmount: true,
+      });
+    }
   };
 
   const handleRefreshRate = () => {
     console.log('Refreshing exchange rate');
+  };
+
+  const handleOfficeChange = (value: string) => {
+    setSelectedOffice(value);
+    setTouched((prev) => ({ ...prev, selectedOffice: true }));
+    setErrors((prev) => ({ ...prev, selectedOffice: !value ? 'Выберите адрес офиса' : '' }));
+  };
+
+  const handleGivingAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setGivingAmount(value);
+    setTouched((prev) => ({ ...prev, givingAmount: true }));
+    setErrors((prev) => ({ ...prev, givingAmount: !value ? 'Введите сумму' : '' }));
   };
 
   const officeOptions = [
@@ -108,64 +146,77 @@ const ExchangePage: React.FC = () => {
     <MainLayout>
       <PageContainer>
         <Title>Обмен</Title>
-        <ContentCard>
-          <ExchangeRateBox>Текущий курс: 83,26 ₽ ≈ 1 USDT</ExchangeRateBox>
 
-          <form onSubmit={handleSubmit}>
-            <FormGroup>
-              <SelectField
-                label="Адрес офиса"
-                options={officeOptions}
-                value={selectedOffice}
-                onChange={setSelectedOffice}
-                placeholder="Выберите адрес офиса"
+        <ExchangeRateBox>Текущий курс: 83,26 ₽ ≈ 1 USDT</ExchangeRateBox>
+
+        <form onSubmit={handleSubmit}>
+          <FormGroup>
+            <SelectField
+              label="Адрес офиса"
+              options={officeOptions}
+              value={selectedOffice}
+              onChange={handleOfficeChange}
+              placeholder="Выберите адрес офиса"
+              error={touched.selectedOffice && errors.selectedOffice ? errors.selectedOffice : undefined}
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <InputWithSymbol>
+              <InputField
+                label="Отдаёте"
+                placeholder="200 000"
+                type="text"
+                value={givingAmount}
+                onChange={handleGivingAmountChange}
+                error={touched.givingAmount && errors.givingAmount ? { message: errors.givingAmount } : undefined}
               />
-            </FormGroup>
+            </InputWithSymbol>
+          </FormGroup>
 
-            <FormGroup>
-              <InputWithSymbol>
-                <InputField label="Отдаёте" type="text" value={givingAmount} onChange={(e) => setGivingAmount(e.target.value)} />
-                <button type="button">₽</button>
-              </InputWithSymbol>
-            </FormGroup>
+          <ArrowButton type="button" onClick={handleSwap} disabled={!selectedOffice || !givingAmount}>
+            <ChangeArrowsIcon />
+          </ArrowButton>
 
-            <ArrowButton type="button" onClick={handleSwap}>
-              <ChangeArrowsIcon />
-            </ArrowButton>
+          <FormGroup>
+            <InputWithSymbol>
+              <InputField label="Получаете" placeholder="24 02" type="text" value={receivingAmount} onChange={(e) => setReceivingAmount(e.target.value)} />
+            </InputWithSymbol>
+          </FormGroup>
 
-            <FormGroup>
-              <InputWithSymbol>
-                <InputField label="Получаете" type="text" value={receivingAmount} onChange={(e) => setReceivingAmount(e.target.value)} />
-                <button type="button">₿</button>
-              </InputWithSymbol>
-            </FormGroup>
+          <CheckboxContainer>
+            <Checkbox
+              id="courierDelivery"
+              label={
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  Доставка курьером <QuestionIcon></QuestionIcon>
+                </div>
+              }
+              checked={isCourierDelivery}
+              onChange={(e) => setIsCourierDelivery(e.target.checked)}
+              error={false}
+            />
+          </CheckboxContainer>
+          <DisabledText>Функция станет доступна с уровня «Gold»</DisabledText>
 
-            <CheckboxContainer>
-              <Checkbox type="checkbox" id="courierDelivery" checked={isCourierDelivery} onChange={(e) => setIsCourierDelivery(e.target.checked)} disabled />
-              <CheckboxLabel htmlFor="courierDelivery">
-                Доставка курьером
-                <QuestionMark title="Информация о доставке курьером">?</QuestionMark>
-              </CheckboxLabel>
-            </CheckboxContainer>
-            <DisabledText>Функция станет доступна с уровня «Gold»</DisabledText>
+          <FormGroup>
+            <InputField label="Промокод" type="text" value={promoCode} onChange={(e) => setPromoCode(e.target.value)} />
+          </FormGroup>
 
-            <FormGroup>
-              <InputField label="Промокод" type="text" value={promoCode} onChange={(e) => setPromoCode(e.target.value)} />
-            </FormGroup>
+          <InfoBox>
+            <InfoIcon />
+            <InfoText>Курс фиксируется на 1 час</InfoText>
+          </InfoBox>
 
-            <InfoBox>
-              <InfoIcon />
-              <InfoText>Курс фиксируется на 1 час</InfoText>
-            </InfoBox>
-
-            <ButtonGroup>
-              <Button type="submit">Оставить заявку</Button>
-              <SecondaryButton type="button" onClick={handleRefreshRate}>
-                Обновить курс
-              </SecondaryButton>
-            </ButtonGroup>
-          </form>
-        </ContentCard>
+          <ButtonGroup>
+            <Button type="submit" disabled={!selectedOffice || !givingAmount}>
+              Оставить заявку
+            </Button>
+            <SecondaryButton type="button" onClick={handleRefreshRate}>
+              Обновить курс
+            </SecondaryButton>
+          </ButtonGroup>
+        </form>
       </PageContainer>
     </MainLayout>
   );

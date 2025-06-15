@@ -22,15 +22,15 @@ const StyledTextArea = styled.textarea<{ $hasIcon: boolean; $hasEndContent: bool
   align-items: center;
   align-self: stretch;
   box-sizing: border-box;
-  border: 1px solid var(--grey-700);
-  border-radius: 8px;
+  border: 2px solid var(--grey-700);
+  border-radius: 12px;
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
   background: var(--background);
-  color: var(--grayscale_400, #a1a1aa);
+  color: var(--foreground);
   resize: vertical;
 
   &:focus {
@@ -48,7 +48,6 @@ const StyledTextArea = styled.textarea<{ $hasIcon: boolean; $hasEndContent: bool
 `;
 
 const InputWrapper = styled.div`
-  margin-bottom: 1rem;
   width: 100%;
 `;
 
@@ -67,7 +66,6 @@ const InputContainer = styled.div`
   position: relative;
   width: 100%;
 `;
-
 const StyledInput = styled.input<{ $hasIcon: boolean; $hasEndContent: boolean }>`
   width: 100%;
   height: 42px;
@@ -77,15 +75,15 @@ const StyledInput = styled.input<{ $hasIcon: boolean; $hasEndContent: boolean }>
   align-items: center;
   align-self: stretch;
   box-sizing: border-box;
-  border: 1px solid var(--grey-700);
-  border-radius: 8px;
+  border: 2px solid var(--grey-700);
+  border-radius: 12px;
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
   background: var(--background);
-  color: var(--grayscale_400, #a1a1aa);
+  color: var(--foreground);
 
   &:focus {
     outline: none;

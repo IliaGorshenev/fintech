@@ -11,7 +11,6 @@ interface SelectFieldProps {
 }
 
 const SelectWrapper = styled.div`
-  margin-bottom: 1rem;
   width: 100%;
 `;
 
@@ -39,8 +38,8 @@ const SelectButton = styled.button<{ $isOpen: boolean; $hasError: boolean }>`
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  border: 1px solid ${(props) => (props.$hasError ? 'var(--error)' : props.$isOpen ? 'var(--primary)' : 'var(--grey-700)')};
-  border-radius: 8px;
+  border: 2px solid ${(props) => (props.$hasError ? 'var(--error)' : props.$isOpen ? 'var(--primary)' : 'var(--grey-700)')};
+  border-radius: 12px;
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
