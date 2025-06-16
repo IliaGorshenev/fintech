@@ -22,24 +22,6 @@ const MenuLink = styled(Link)`
   color: var(--foreground);
 `;
 
-const MenuButton = styled.button`
-  display: flex;
-  padding: 16px;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-  border-radius: 12px;
-  background: var(--secondary_100, #e3e3f3);
-  margin-bottom: 12px;
-  border: none;
-  width: 100%;
-  cursor: pointer;
-  color: var(--foreground);
-  text-align: left;
-  font-size: 16px;
-`;
-
 const MenuItemContent = styled.div`
   display: flex;
   align-items: center;
@@ -228,57 +210,11 @@ const FAQIcon = () => (
   </svg>
 );
 
-const ChatIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path
-      d="M8.5 19H8C4 19 2 18 2 13V8C2 4 4 2 8 2H16C20 2 22 4 22 8V13C22 17 20 19 16 19H15.5C15.19 19 14.89 19.15 14.7 19.4L13.2 21.4C12.54 22.28 11.46 22.28 10.8 21.4L9.3 19.4C9.14 19.18 8.77 19 8.5 19Z"
-      stroke="#3F3D51"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path d="M15.9965 11H16.0054" stroke="#3F3D51" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M11.9955 11H12.0045" stroke="#3F3D51" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M7.99451 11H8.00349" stroke="#3F3D51" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
-const LogoutIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path
-      d="M8.90002 7.56001C9.21002 3.96001 11.06 2.49001 15.11 2.49001H15.24C19.71 2.49001 21.5 4.28001 21.5 8.75001V15.27C21.5 19.74 19.71 21.53 15.24 21.53H15.11C11.09 21.53 9.24002 20.08 8.91002 16.54"
-      stroke="#3F3D51"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path d="M15 12H3.62" stroke="#3F3D51" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="M5.85 8.65002L2.5 12L5.85 15.35" stroke="#3F3D51" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-
 const ButtonsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
   margin-top: 24px;
-`;
-
-const ChatButton = styled(TelegramButton)`
-  background: var(--primary);
-  color: var(--primary-foreground);
-  justify-content: center;
-`;
-
-const LogoutButton = styled(TelegramButton)`
-  background: transparent;
-  border: 1px solid var(--error);
-  color: var(--error);
-
-  &:hover {
-    background-color: rgba(229, 25, 120, 0.1);
-    box-shadow: none;
-  }
 `;
 
 const SettingsPage: React.FC = () => {

@@ -9,6 +9,7 @@ export const useErrorNotification = () => {
     setErrorNotifications((prev) => [...prev, notification]);
 
     // Auto-remove after 5 seconds
+    // eslint-disable-next-line no-undef
     setTimeout(() => {
       setErrorNotifications((prev) => prev.filter((n) => n.id !== notification.id));
     }, 5000);

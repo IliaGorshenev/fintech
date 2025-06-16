@@ -1,3 +1,4 @@
+import React from 'react';
 import { keyframes, styled } from 'styled-components';
 
 export const shake = keyframes`
@@ -7,7 +8,6 @@ export const shake = keyframes`
   75% { transform: translateX(-5px); }
   100% { transform: translateX(0); }
 `;
-
 export const CheckboxContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -81,7 +81,7 @@ interface CheckboxProps {
   id: string;
   label: string | React.ReactNode;
   checked: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: React.ChangeEvent) => void;
   error?: boolean;
   errorMessage?: string;
 }
@@ -99,7 +99,6 @@ export const Checkbox: React.FC<CheckboxProps> = ({ id, label, checked, onChange
   );
 };
 
-// Add this new styled component for error messages
 const ErrorText = styled.p`
   color: var(--error);
   font-family: Inter;
@@ -108,10 +107,9 @@ const ErrorText = styled.p`
   font-weight: 400;
   line-height: 16px;
   margin-top: 4px;
-  margin-left: 28px; // Align with the checkbox text
+  margin-left: 28px;
 `;
 
-// You can also create a separate component for checkbox groups if needed
 interface CheckboxGroupProps {
   children: React.ReactNode;
 }

@@ -33,7 +33,7 @@ function App() {
   useEffect(() => {
     setTheme('light');
     // setTheme('dark');
-  }, []);
+  }, [setTheme]);
 
   const appContent = (
     <TelegramProvider>
