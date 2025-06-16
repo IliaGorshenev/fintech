@@ -18,11 +18,7 @@ const OnBoardingPages: React.FC = () => {
       navigate('/dashboard');
     }
   };
-
-  const skipOnboarding = () => {
-    navigate('/');
-  };
-
+ 
   // Animation variants for the image
   const imageVariants = {
     hidden: { opacity: 0, y: 20 },
