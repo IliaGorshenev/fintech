@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 import styled from 'styled-components';
 import { ErrorIcon, SuccessIcon } from '../../icons/icons';
@@ -128,7 +128,7 @@ const EndContentContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`; 
+`;
 export const InputField: React.FC<InputFieldProps> = ({ label, registration, error, success, type = 'text', endContent, rows, ...rest }) => {
   // const [isFocused, setIsFocused] = useState(false);
   const hasIcon = Boolean(error || success);
