@@ -128,20 +128,18 @@ const EndContentContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-type InputComponentType = typeof StyledInput | typeof StyledTextArea;
-
+`; 
 export const InputField: React.FC<InputFieldProps> = ({ label, registration, error, success, type = 'text', endContent, rows, ...rest }) => {
-  const [isFocused, setIsFocused] = useState(false);
+  // const [isFocused, setIsFocused] = useState(false);
   const hasIcon = Boolean(error || success);
   const hasEndContent = Boolean(endContent);
   const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setIsFocused(true);
+    // setIsFocused(true);
     if (rest.onFocus) rest.onFocus(e);
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setIsFocused(false);
+    // setIsFocused(false);
     if (registration?.onBlur) registration.onBlur(e);
     if (rest.onBlur) rest.onBlur(e);
   };
