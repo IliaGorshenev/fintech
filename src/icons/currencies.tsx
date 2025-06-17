@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+
 
 export const CURRENCY_COLORS = {
   BCN: {
@@ -89,24 +89,25 @@ export const CURRENCY_COLORS = {
 };
 
 // Styled component for the icon wrapper
-const IconContainer = styled.div<{ bg: string }>`
-  background-color: ${(props) => props.bg};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 32px;
-  height: 32px;
-  & > svg {
-    max-width: 26px;
-  }
-  border-radius: 12px;
-`;
+// const IconContainer = styled.div<{ bg: string }>`
+//   background-color: ${(props) => props.bg};
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   width: 32px;
+//   height: 32px;
+//   & > svg {
+//     max-width: 26px;
+//   }
+//   border-radius: 12px;
+// `;
 
 // Icon wrapper component
-export const IconWrapper: React.FC<{ children: React.ReactNode; currency: keyof typeof CURRENCY_COLORS }> = ({ children, currency }) => (
-  <IconContainer bg={CURRENCY_COLORS[currency] || CURRENCY_COLORS.DEFAULT}>{children}</IconContainer>
+export const IconWrapper: React.FC<{ children: React.ReactNode; currency: keyof typeof CURRENCY_COLORS }> = ({ children }) => (
+  <>{children}</>
 );
 
+// bg={CURRENCY_COLORS[currency] || CURRENCY_COLORS.DEFAULT}
 // Example usage for a currency that might not have a specific color defined
 export const CNY = () => (
   <IconWrapper currency="CNY">

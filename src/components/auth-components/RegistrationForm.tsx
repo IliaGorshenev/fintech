@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSetAtom } from 'jotai';
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -52,6 +52,11 @@ export const RegistrationForm: React.FC = () => {
   });
 
   console.log('Rendering RegistrationForm');
+  const handleCheckboxChange = (fieldName: 'acceptTerms' | 'acceptMarketing') => (e: ChangeEvent<Element>) => {
+    if (e.target instanceof HTMLInputElement) {
+      setValue(fieldName, e.target.checked);
+    }
+  };
 
   const handleInitialStep = async () => {
     setServerError(undefined);
@@ -103,25 +108,25 @@ export const RegistrationForm: React.FC = () => {
         <InputField label="Ваше имя" registration={register('fullName')} placeholder="Введите имя" error={errors.fullName} />
         <InputField label="Ваш E-mail" registration={register('email')} type="email" placeholder="Введите почту" error={errors.email} autoCapitalize="none" />
         <CheckboxGroup>
-          <Checkbox
-            id="acceptTerms"
-            label={
-              <>
-                Я ознакомлен с <Link to="/terms">пользовательским соглашением</Link> и <Link to="/privacy">политикой конфиденциальности</Link>
-              </>
-            }
-            checked={watch('acceptTerms')}
-            onChange={(e) => setValue('acceptTerms', e.target.checked)}
-            error={!!errors.acceptTerms}
-            errorMessage={errors.acceptTerms?.message}
-          />
-          <Checkbox
-            id="acceptMarketing"
-            label="Согласен на рассылку рекламных уведомлений"
-            checked={watch('acceptMarketing')}
-            onChange={(e) => setValue('acceptMarketing', e.target.checked)}
-          />
-        </CheckboxGroup>
+      <Checkbox
+        id="acceptTerms"
+        label={
+          <>
+            Я ознакомлен с <Link to="/terms">пользовательским соглашением</Link> и <Link to="/privacy">политикой конфиденциальности</Link>
+          </>
+        }
+        checked={watch('acceptTerms')}
+        onChange={handleCheckboxChange('acceptTerms')}
+        error={!!errors.acceptTerms}
+        errorMessage={errors.acceptTerms?.message}
+      />
+      <Checkbox
+        id="acceptMarketing"
+        label="Согласен на рассылку рекламных уведомлений"
+        checked={watch('acceptMarketing')}
+        onChange={handleCheckboxChange('acceptMarketing')}
+      />
+    </CheckboxGroup>
 
         <Button type="button" isLoading={isLoading} disabled={isLoading} onClick={handleInitialStep}>
           Отправить код

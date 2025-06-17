@@ -163,14 +163,14 @@ const ExchangePage: React.FC = () => {
 
           <FormGroup>
             <InputWithSymbol>
-              <InputField
-                label="Отдаёте"
-                placeholder="200 000"
-                type="text"
-                value={givingAmount}
-                onChange={handleGivingAmountChange}
-                error={touched.givingAmount && errors.givingAmount ? { message: errors.givingAmount } : undefined}
-              />
+            <InputField
+              label="Отдаёте"
+              placeholder="200 000"
+              type="text"
+              value={givingAmount}
+              onChange={handleGivingAmountChange}
+              error={touched.givingAmount && errors.givingAmount ? { type: 'manual', message: errors.givingAmount } : undefined}
+            />
             </InputWithSymbol>
           </FormGroup>
 
@@ -185,18 +185,18 @@ const ExchangePage: React.FC = () => {
           </FormGroup>
 
           <CheckboxContainer>
-            <Checkbox
-              id="courierDelivery"
-              label={
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  Доставка курьером <QuestionIcon></QuestionIcon>
-                </div>
-              }
-              checked={isCourierDelivery}
-              onChange={(e) => setIsCourierDelivery(e.target.checked)}
-              error={false}
-            />
-          </CheckboxContainer>
+  <Checkbox
+    id="courierDelivery"
+    label={
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        Доставка курьером <QuestionIcon></QuestionIcon>
+      </div>
+    }
+    checked={isCourierDelivery}
+    onChange={(e) => setIsCourierDelivery((e.target as HTMLInputElement).checked)}
+    error={false}
+  />
+</CheckboxContainer>
           <DisabledText>Функция станет доступна с уровня «Gold»</DisabledText>
 
           <FormGroup>

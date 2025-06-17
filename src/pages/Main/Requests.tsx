@@ -366,11 +366,8 @@ export const RequestsPage: React.FC = () => {
 
   const handleFilterChange = (filter: RequestType) => {
     setActiveFilter(filter);
-  };
-  const handleDateRangeChange = (dates: [Date | null, Date | null]) => {
-    setDateRange(dates);
-    // Add filtering logic based on date range
-  };
+  }; 
+  
   const filteredRequests = requests.filter((request) => {
     // First apply type/status filter
     let passesTypeFilter = true;
