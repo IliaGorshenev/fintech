@@ -26,7 +26,7 @@ import { ReshufflePage } from './pages/Main/ReshufflePage';
 import SettingsPage from './pages/Main/SettingsPage';
 
 // Flag to enable theme preview mode (you can toggle this during development)
-const THEME_PREVIEW_MODE = import.meta.env.DEV && true; // Set to true when you want to preview both themes
+const THEME_PREVIEW_MODE = true; // Set to true when you want to preview both themes
 
 function App() {
   const { theme, setTheme } = useTheme();
